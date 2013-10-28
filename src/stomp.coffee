@@ -131,11 +131,11 @@ class Client
   #     };
   debug: (message) ->
     window?.console?.log message
-      
+
   # Utility method to get the current timestamp (Date.now is not defined in IE8)
   now= ->
     Date.now || new Date().valueOf
-  
+
   # Base method to transmit any stomp frame
   _transmit: (command, headers, body) ->
     out = Frame.marshall(command, headers, body)
@@ -362,7 +362,7 @@ class Client
       abort: ->
         client.abort txid
     }
-  
+
   # [COMMIT Frame](http://stomp.github.com/stomp-specification-1.1.html#COMMIT)
   #
   # * `transaction` is MANDATORY.
@@ -377,7 +377,7 @@ class Client
     @_transmit "COMMIT", {
       transaction: transaction
     }
-  
+
   # [ABORT Frame](http://stomp.github.com/stomp-specification-1.1.html#ABORT)
   #
   # * `transaction` is MANDATORY.
@@ -392,7 +392,7 @@ class Client
     @_transmit "ABORT", {
       transaction: transaction
     }
-  
+
   # [ACK Frame](http://stomp.github.com/stomp-specification-1.1.html#ACK)
   #
   # * `messageID` & `subscription` are MANDATORY.
@@ -459,7 +459,7 @@ Stomp =
     # This hack is deprecated and  `Stomp.over()` method should be used
     # instead.
     klass = Stomp.WebSocketClass || WebSocket
-    ws = new klass(url, protocols)
+    ws = new klass(url)
     new Client ws
 
   # This method is an alternative to `Stomp.client()` to let the user
